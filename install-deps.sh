@@ -7,13 +7,15 @@ detect_package_manager() {
             ubuntu|debian)
                 echo "Debian based Linux detected."
                 PACKAGE_MANAGER="apt"
+                VIM_PACKAGE="vim-gtk3"
                 ;;
-            fedora|centos|rhel)
+            fedora|fedora-asahi-remix|centos|rhel)
                 echo "Red Hat based Linux detected."
                 PACKAGE_MANAGER="dnf"
+                VIM_PACKAGE="vim-enhanced"
                 ;;
             *)
-                echo "Unsupported Linux distribution"
+                echo "Unsupported Linux distribution: $ID"
                 exit 1
                 ;;
         esac
@@ -24,16 +26,23 @@ detect_package_manager() {
 }
 
 install_common_packages() {
-    sudo $PACKAGE_MANAGER install -y vim-gtk3 curl wget qbittorrent firefox keepassxc mpv
+    if [ "$PACKAGE_MANAGER" = "apt" ]; then
+        sudo $PACKAGE_MANAGER update
+    fi
+    sudo $PACKAGE_MANAGER install -y "$VIM_PACKAGE" curl wget qbittorrent firefox keepassxc mpv
 }
 
 install_gnome() {
-    echo "GNOME detected. Installing GNOME-specific tools... TODO"
+    echo "GNOME detected. Installing GNOME-specific tools..."
+    sudo $PACKAGE_MANAGER install -y gnome-tweaks
 }
 
 detect_package_manager
 install_common_packages
+
 if [[ "$XDG_CURRENT_DESKTOP" == "GNOME" ]]; then
     install_gnome
 fi
+
 echo "Installation complete."
+
