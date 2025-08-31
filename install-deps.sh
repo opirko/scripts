@@ -29,7 +29,15 @@ install_common_packages() {
     if [ "$PACKAGE_MANAGER" = "apt" ]; then
         sudo $PACKAGE_MANAGER update
     fi
-    sudo $PACKAGE_MANAGER install -y "$VIM_PACKAGE" curl wget qbittorrent firefox keepassxc mpv
+    sudo $PACKAGE_MANAGER install -y \
+	    "$VIM_PACKAGE" \
+	    curl \
+	    firefox \
+	    git \
+	    keepassxc \
+	    mpv \
+	    wget \
+	    qbittorrent
 }
 
 install_gnome() {
