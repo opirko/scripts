@@ -46,6 +46,7 @@ install_gnome() {
     echo "GNOME detected. Installing GNOME-specific tools..."
     sudo $PACKAGE_MANAGER install -y \
 	    gnome-tweaks \
+	    gnome-shell-extension-autohidetopbar \
 	    gnome-shell-extension-system-monitor
 }
 
