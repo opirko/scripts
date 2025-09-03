@@ -45,6 +45,14 @@ install_gnome() {
     sudo $PACKAGE_MANAGER install -y gnome-tweaks
 }
 
+check_manual_install() {
+    local cmd="$1"
+    local download_url="$2"
+    if ! command -v "$cmd" &> /dev/null; then
+        echo "[MANUAL] Install $cmd: $download_url"
+    fi
+}
+
 detect_package_manager
 install_common_packages
 
@@ -53,4 +61,9 @@ if [[ "$XDG_CURRENT_DESKTOP" == "GNOME" ]]; then
 fi
 
 echo "Installation complete."
+
+check_manual_install "signal-desktop" "https://signal.org/download/"
+check_manual_install "slack" "https://slack.com/downloads/linux"
+check_manual_install "spotify" "https://www.spotify.com/cz/download/linux/"
+check_manual_install "code" "https://code.visualstudio.com/docs/setup/linux"
 
