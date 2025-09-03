@@ -31,6 +31,8 @@ install_common_packages() {
     fi
     sudo $PACKAGE_MANAGER install -y \
 	    "$VIM_PACKAGE" \
+	    clang-format \
+	    cmake \
 	    curl \
 	    firefox \
 	    git \
@@ -42,7 +44,9 @@ install_common_packages() {
 
 install_gnome() {
     echo "GNOME detected. Installing GNOME-specific tools..."
-    sudo $PACKAGE_MANAGER install -y gnome-tweaks
+    sudo $PACKAGE_MANAGER install -y \
+	    gnome-tweaks \
+	    gnome-shell-extension-system-monitor
 }
 
 check_manual_install() {
