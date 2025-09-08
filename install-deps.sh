@@ -35,6 +35,9 @@ install_common_packages() {
 	    cmake \
 	    curl \
 	    firefox \
+	    firmware-linux \
+	    firmware-iwlwifi \
+	    firmware-realtek \
 	    git \
 	    keepassxc \
 	    mpv \
